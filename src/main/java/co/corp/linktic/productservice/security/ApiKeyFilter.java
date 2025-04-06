@@ -24,7 +24,14 @@ public class ApiKeyFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request,
                                     HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
+
+        String path = request.getRequestURI();
         if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
+            filterChain.doFilter(request, response);
+            return;
+        }
+
+        if (path.contains("/swagger-ui") || path.contains("/swagger-ui.html") || path.contains("/api-docs")) {
             filterChain.doFilter(request, response);
             return;
         }

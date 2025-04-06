@@ -56,8 +56,8 @@ La aplicación estará disponible en `http://localhost:8080`
 ## Documentación de la API
 
 Una vez que la aplicación esté en ejecución, puedes acceder a la documentación de la API en:
-- Swagger UI: `http://localhost:8080/swagger-ui.html`
-- OpenAPI JSON: `http://localhost:8080/v3/api-docs`
+- Swagger UI: `http://localhost:8081/api/swagger-ui/index.html`
+- OpenAPI JSON: `http://localhost:8081/api/api-docs`
 
 ## Ejecución con Docker
 
