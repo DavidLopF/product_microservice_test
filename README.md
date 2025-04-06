@@ -91,12 +91,3 @@ src/
 │       ├── application.properties    # Configuración de la aplicación
 │       └── application.yml           # Configuración alternativa
 ```
-
-## Contribución
-
-1. Fork el proyecto
-2. Crear una rama para tu feature (`git checkout -b feature/AmazingFeature`)
-3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
-4. Push a la rama (`git push origin feature/AmazingFeature`)
-5. Abrir un Pull Request
-
