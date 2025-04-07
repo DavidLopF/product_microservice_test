@@ -20,4 +20,9 @@ public interface ProductService {
     Product updateProduct(Long id, ProductUpdateDTO product);
 
     void deleteProduct(Long id);
+
+    Integer getProductQuantityById(Long categoryId);
+
+    Product updateProductStock(Long productId, Integer quantity);
+
 }

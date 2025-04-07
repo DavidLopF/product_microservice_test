@@ -4,13 +4,11 @@ import co.corp.linktic.productservice.dto.product.ProductCreateDTO;
 import co.corp.linktic.productservice.dto.product.ProductUpdateDTO;
 import co.corp.linktic.productservice.entity.Product;
 import co.corp.linktic.productservice.repository.ProductRepository;
-import co.corp.linktic.productservice.service.product.ProductService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -64,5 +62,18 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public void deleteProduct(Long id) {
         productRepository.deleteById(id);
+    }
+
+    @Override
+    public Integer getProductQuantityById(Long Id) {
+        return productRepository.findById(Id).map(Product::getStock).orElse(0);
+    }
+
+    @Override
+    public Product updateProductStock(Long productId, Integer stock) {
+        return productRepository.findById(productId).map(existingProduct -> {
+            existingProduct.setStock(stock);
+            return productRepository.save(existingProduct);
+        }).orElseThrow(() -> new RuntimeException("Product not found with id: " + productId));
     }
 }

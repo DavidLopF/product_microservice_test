@@ -142,4 +142,36 @@ public class ProductController {
         response.setData(null);
         return ResponseEntity.ok(response);
     }
+
+
+    @Operation(summary = "Obtener cantidad de productos por ID", description = "Retorna la cantidad de un producto específico por su ID")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Cantidad de producto encontrada exitosamente",
+                    content = @Content(schema = @Schema(implementation = GeneralResponseDTO.class))),
+            @ApiResponse(responseCode = "404", description = "Producto no encontrado"),
+            @ApiResponse(responseCode = "401", description = "No autorizado - API key inválida"),
+            @ApiResponse(responseCode = "500", description = "Error interno del servidor")
+    })
+    @GetMapping(value = "/{id}/quantity", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<GeneralResponseDTO<Integer>> getProductQuantityById(
+            @Parameter(description = "ID del producto", example = "1")
+            @PathVariable Long id) {
+        Integer quantity = productService.getProductQuantityById(id);
+        GeneralResponseDTO<Integer> response = new GeneralResponseDTO<>();
+        response.setData(quantity);
+        return ResponseEntity.ok(response);
+    }
+
+    @PutMapping(value = "/{id}/stock", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<GeneralResponseDTO<Product>> updateProductStock(
+            @Parameter(description = "ID del producto a actualizar", example = "1")
+            @PathVariable Long id,
+            @Parameter(description = "Nueva cantidad de stock", example = "20")
+            @RequestParam Integer stock) {
+        Product updatedProduct = productService.updateProductStock(id, stock);
+        GeneralResponseDTO<Product> response = new GeneralResponseDTO<>();
+        response.setData(updatedProduct);
+        return ResponseEntity.ok(response);
+    }
+
 }
